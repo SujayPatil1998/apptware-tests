@@ -19,7 +19,7 @@ class ConsumptionOnDemandTest {
 
   @Test
   void testConsumptionOnDemand() {
-    int limit = 2; // Define a small limit for testing purposes
+    int limit = 1000; // Define a small limit for testing purposes
 
     // Test limited data fetching as Stream<String>
     try (Stream<String> limitedDataStream = dataReader.fetchLimitadData(limit)) {

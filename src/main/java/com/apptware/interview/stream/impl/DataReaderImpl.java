@@ -2,7 +2,10 @@ package com.apptware.interview.stream.impl;
 
 import com.apptware.interview.stream.DataReader;
 import com.apptware.interview.stream.PaginationService;
+
+import java.util.List;
 import java.util.stream.Stream;
+import com.apptware.interview.stream.Service.SService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +13,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 class DataReaderImpl implements DataReader {
+
+  @Autowired
+  private SService sService;
 
   @Autowired
   private PaginationService paginationService;
@@ -29,10 +35,14 @@ class DataReaderImpl implements DataReader {
    * Logs have been added to track the data fetching behavior.
    */
   private Stream<String> fetchPaginatedDataAsStream() {
-    log.info("Fetching paginated data as stream.");
+      log.info("Fetching paginated data as stream.");
 
-    // Example data stream; replace with actual fetching logic
-    Stream<String> dataStream = Stream.of("Item1", "Item2", "Item3", "Item4");
-    return dataStream.peek(item -> log.info("Fetched Item: {}", item));
+      // Example data stream; replace with actual fetching logic
+
+
+      List<String> ls = this.sService.getAllData();
+      Stream<String> dataStream = ls.stream();
+      return dataStream.peek(item -> log.info("Fetched Item: {}", item));
+
   }
 }
